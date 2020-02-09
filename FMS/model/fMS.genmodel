@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/FMS/src-gen" creationIcons="false" editDirectory="/FMS.edit/src-gen"
+    editorDirectory="/FMS.editor/src-gen" modelPluginID="FMS" modelName="FMS" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>fMS.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="FMS" disposableProviderFactory="true" ecorePackage="fMS.ecore#/">
+    <genClasses ecoreClass="fMS.ecore#//FSM">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fMS.ecore#//FSM/state"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fMS.ecore#//FSM/transition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fMS.ecore#//FSM/name"/>
+    </genClasses>
+    <genClasses ecoreClass="fMS.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fMS.ecore#//State/name"/>
+    </genClasses>
+    <genClasses ecoreClass="fMS.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fMS.ecore#//Transition/stateStart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fMS.ecore#//Transition/stateEnd"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fMS.ecore#//Transition/name"/>
+    </genClasses>
+    <genClasses ecoreClass="fMS.ecore#//InitState"/>
+    <genClasses ecoreClass="fMS.ecore#//FinalState"/>
+  </genPackages>
+</genmodel:GenModel>

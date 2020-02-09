@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fMS:FSM xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:fMS="http://www.example.org/fMS"
+    xsi:schemaLocation="http://www.example.org/fMS fMS.ecore">
+  <state name="ouvert"/>
+  <state name="ferme"/>
+  <state xsi:type="fMS:InitState"
+      name="init"/>
+  <state xsi:type="fMS:FinalState"
+      name="final"/>
+  <transition
+      stateStart="#//@state.2"
+      stateEnd="#//@state.0"
+      name="ti"/>
+  <transition
+      stateStart="#//@state.1"
+      stateEnd="#//@state.0"
+      name="on"/>
+  <transition
+      stateStart="#//@state.0"
+      stateEnd="#//@state.1"
+      name="off"/>
+  <transition
+      stateStart="#//@state.1"
+      stateEnd="#//@state.3"
+      name="stop"/>
+</fMS:FSM>

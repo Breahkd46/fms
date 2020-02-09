@@ -1,0 +1,90 @@
+package fMS.aspects
+
+import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+import fMS.FSM
+import fMS.State
+import fMS.Transition
+import fMS.InitState
+import fMS.FinalState
+import fMS.FMSPackage
+import static extension fMS.aspects.FSMAspect.*
+import static extension fMS.aspects.StateAspect.*
+import static extension fMS.aspects.TransitionAspect.*
+import static extension fMS.aspects.InitStateAspect.*
+import static extension fMS.aspects.FinalStateAspect.*
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import fr.inria.diverse.k3.al.annotationprocessor.Step
+import java.util.Scanner
+
+class Interpreter {
+	def static void main(String[] args){
+		FMSPackage.eINSTANCE.class
+		Resource$Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl);
+		var Resource resource = new ResourceSetImpl().getResource(URI.createURI('/home/valo/workspaces/fms/FMS/model/FSM.xmi'), true)
+		var myfsm = resource.contents.get(0) as FSM
+		myfsm.execute
+	}
+}
+
+interface Visitable {
+	def void accept(Visitor v);
+}
+
+class Visitor {
+	def void visit(Visitable v) {
+		
+	}
+}
+
+@Aspect(className=FSM)
+class FSMAspect {
+	@Step
+	def public void execute() {
+		var sc = new Scanner(System.in)
+		System.out.println("Begin")
+		var current = _self.state.filter[st | st instanceof InitState].get(0);
+		var fin = _self.state.filter[st | st instanceof FinalState].get(0);
+		while(!current.equals(fin)) {
+			System.out.println("State : " + current.name)
+			val trigger = sc.nextLine()
+			val cu = current
+			var transition = _self.transition.findFirst[tr | tr.stateStart.equals(cu) && tr.name.equals(trigger)]
+			if (transition != null) {
+				current = transition.stateEnd
+			}
+		}
+		System.out.println("State : " + current.name)
+		System.out.println("FIN")
+	}
+
+}
+
+@Aspect(className=State)
+class StateAspect {
+	
+	
+}
+
+@Aspect(className=Transition)
+class TransitionAspect {
+	
+	
+}
+
+@Aspect(className=InitState)
+class InitStateAspect extends StateAspect {
+	
+
+}
+
+@Aspect(className=FinalState)
+class FinalStateAspect extends StateAspect {
+	
+
+}
+
+
+
